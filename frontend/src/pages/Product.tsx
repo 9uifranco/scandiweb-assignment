@@ -3,9 +3,9 @@ import { useCart } from "../providers/CartContext";
 import { useParams } from "react-router-dom";
 import { Product } from "../types";
 import { sanitizeHTML } from "../utils/sanitize";
-import axios from "axios";
 import { parse } from "../utils/parse";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import api from "../api/axios";
 
 const GRAPHQL_ENDPOINT = "/graphql"; // Or your actual endpoint URL
 
@@ -68,8 +68,8 @@ export default function ProductPage() {
           `;
 
             try {
-                const response = await axios.post(
-                    import.meta.env.VITE_BACKEND_BASE_URL + GRAPHQL_ENDPOINT,
+                const response = await api.post(
+                    GRAPHQL_ENDPOINT,
                     {
                         query,
                         variables: { id },

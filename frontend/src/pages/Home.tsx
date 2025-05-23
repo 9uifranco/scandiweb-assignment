@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { useCategories } from "../providers/CategoriesContext";
-import axios from "axios";
 import { Product } from "../types";
+import api from "../api/axios";
 
 const GRAPHQL_ENDPOINT = "/graphql";
 
@@ -46,8 +46,8 @@ export default function Home() {
             }`;
 
             try {
-                const response = await axios.post(
-                    import.meta.env.VITE_BACKEND_BASE_URL + GRAPHQL_ENDPOINT,
+                const response = await api.post(
+                    GRAPHQL_ENDPOINT,
                     {
                         query,
                         variables: { categoryName }

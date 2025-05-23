@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { Product } from "../types";
 import { v4 as uuidv4 } from 'uuid';
-import axios from "axios";
+import api from "../api/axios";
 
 export type CartItem = {
     id: number;
@@ -74,7 +74,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         `;
 
         try {
-            const response = await axios.post(import.meta.env.VITE_BACKEND_BASE_URL + GRAPHQL_ENDPOINT, {
+            const response = await api.post(GRAPHQL_ENDPOINT, {
                 query: mutation,
                 variables: {
                     total: parseFloat(total.toFixed(2)),
